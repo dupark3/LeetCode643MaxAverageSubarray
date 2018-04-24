@@ -1,4 +1,5 @@
-#include <climits>
+#include <algorithm> // accumulate
+#include <climits> // INT_MIN
 #include <iostream>
 #include <vector>
 
@@ -13,26 +14,17 @@ public:
 
         // n - k is the first element of the last subarray
         for (int i = 0; i <= n - k; ++i){
-            double subarraySum = 0;
-
-            // i + k - 1 is the last element of a subarray
-            for(int j = i; j <= i + k - 1; ++j)
-                subarraySum += nums[j]; 
-            
-            // update maxAvg with new average if it is greater
-            double subarrayAvg = subarraySum / k;
-            if (subarrayAvg > maxAvg) 
-                maxAvg = subarrayAvg;
+            // i + k is one past the last element of a subarray
+            double subarrayAvg = accumulate(nums.begin() + i, nums.begin() + i + k, 0.0) / k;
+            if (subarrayAvg > maxAvg) maxAvg = subarrayAvg;
         }
         cout << maxAvg << endl;
     }
 };
 
 int main(){
-    vector<int> nums;
-    for(int i = 0; i != 30000; ++i)
-        nums.push_back(10000);
-    int k = 5;
+    vector<int> nums = {1,12,-5,-6,50,3};
+    int k = 4;
     Solution s;
     s.findMaxAverage(nums, k);
     return 0;
