@@ -12,10 +12,12 @@ public:
         int n = nums.size();
         double maxAvg = INT_MIN;
 
-        // n - k is the first element of the last subarray
-        for (int i = 0; i <= n - k; ++i){
+        // n - k + 1 is one past the first element of the last subarray
+        for (int i = 0; i != n - k + 1; ++i){
+            double subarraySum = 0;
             // i + k is one past the last element of a subarray
-            double subarraySum = accumulate(nums.begin() + i, nums.begin() + i + k, 0.0);
+            for (int j = i; j != i + k; ++j)
+                subarraySum += nums[j];
             double subarrayAvg =  subarraySum / k;
             if (subarrayAvg > maxAvg) maxAvg = subarrayAvg;
         }
