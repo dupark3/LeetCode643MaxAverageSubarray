@@ -5,21 +5,27 @@
 
 using namespace std;
 
-
 class Solution {
 public:
     double findMaxAverage(vector<int>& nums, int k) {
         int n = nums.size();
         double maxAvg = INT_MIN;
+        double subarraySum = 0;
 
-        // n - k + 1 is one past the first element of the last subarray
-        for (int i = 0; i != n - k + 1; ++i){
-            double subarraySum = 0;
-            // i + k is one past the last element of a subarray
-            for (int j = i; j != i + k; ++j)
-                subarraySum += nums[j];
-            double subarrayAvg =  subarraySum / k;
-            if (subarrayAvg > maxAvg) maxAvg = subarrayAvg;
+        // n - k is the first element of the last subarray
+        for (int i = 0; i <= n - k; ++i){
+            if (i > 0){
+                subarraySum = subarraySum - nums[i-1] + nums[i+k-1];
+            } else {
+                for (int j = i; j != i + k; ++j)
+                    subarraySum += nums[j];
+            }            
+            
+            // update maxAvg with new average if it is greater
+            double subarrayAvg = subarraySum / k;
+            
+            if (subarrayAvg > maxAvg) 
+                maxAvg = subarrayAvg;
         }
         cout << maxAvg << endl;
         return maxAvg;
