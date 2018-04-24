@@ -19,12 +19,14 @@ public:
             if (subarrayAvg > maxAvg) maxAvg = subarrayAvg;
         }
         cout << maxAvg << endl;
+        return maxAvg;
     }
 };
 
 int main(){
     vector<int> nums = {1,12,-5,-6,50,3};
     int k = 4;
+    cout << nums.size() << endl;
     Solution s;
     s.findMaxAverage(nums, k);
     return 0;
