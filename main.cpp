@@ -15,7 +15,8 @@ public:
         // n - k is the first element of the last subarray
         for (int i = 0; i <= n - k; ++i){
             // i + k is one past the last element of a subarray
-            double subarrayAvg = accumulate(nums.begin() + i, nums.begin() + i + k, 0.0) / k;
+            double subarraySum = accumulate(nums.begin() + i, nums.begin() + i + k, 0.0);
+            double subarrayAvg =  subarraySum / k;
             if (subarrayAvg > maxAvg) maxAvg = subarrayAvg;
         }
         cout << maxAvg << endl;
@@ -26,7 +27,7 @@ public:
 int main(){
     vector<int> nums = {1,12,-5,-6,50,3};
     int k = 4;
-    cout << nums.size() << endl;
+    
     Solution s;
     s.findMaxAverage(nums, k);
     return 0;
