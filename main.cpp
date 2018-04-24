@@ -9,7 +9,7 @@ class Solution {
 public:
     double findMaxAverage(vector<int>& nums, int k) {
         int n = nums.size();
-        double maxAvg = INT_MIN;
+        double maxSum = INT_MIN;
         double subarraySum = 0;
 
         // n - k is the first element of the last subarray
@@ -21,14 +21,11 @@ public:
                     subarraySum += nums[j];
             }            
             
-            // update maxAvg with new average if it is greater
-            double subarrayAvg = subarraySum / k;
-            
-            if (subarrayAvg > maxAvg) 
-                maxAvg = subarrayAvg;
+            if (subarraySum > maxSum) 
+                maxSum = subarraySum;
         }
-        cout << maxAvg << endl;
-        return maxAvg;
+        cout << maxSum / k << endl;
+        return maxSum / k;
     }
 };
 
